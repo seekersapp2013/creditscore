@@ -62,7 +62,7 @@ export default class Feed extends React.Component {
     const { newMessage, name } = this.state;
     const message = new Message({
       content: newMessage,
-      name,
+      creditorName: name,
       createdBy: this.state.currentUser._id,
     });
     const { messages, createdMessageIDs } = this.state;
@@ -80,7 +80,7 @@ export default class Feed extends React.Component {
           {' '}
           says:
         </Text.p>
-        <Text.em>{message.attrs.name}</Text.em>
+        <Text.em>{message.attrs.creditorName}</Text.em>
         <Text.em>{message.attrs.content}</Text.em>
       </div>
     ));
