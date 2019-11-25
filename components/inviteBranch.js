@@ -52,8 +52,8 @@ export default class inviteBranch extends React.Component {
   await group.create();
 
   //Branch Invites ID. 
-  const group = await UserGroup.findById(myGroupId);
-    const usernameToInvite = 'babalola.id';
+  const group = await UserGroup.findById(Branch1);
+    const usernameToInvite = _id;
     const invitation = await group.makeGroupMembership(usernameToInvite);
         console.log(invitation._id); // the ID used to later activate an invitation
     
@@ -68,10 +68,10 @@ export default class inviteBranch extends React.Component {
     }
   }
   async submit() {
-    const { newMessage, name } = this.state;
-    const message = new Message({
+    const { UserGroup, name } = this.state;
+    const Group = new Group({
       content: newMessage,
-      creditorName: name,
+      AgentName: name,
       createdBy: this.state.currentUser._id,
     });
     const { messages, createdMessageIDs } = this.state;
@@ -85,12 +85,12 @@ export default class inviteBranch extends React.Component {
     return this.state.messages.map(message => (
       <div key={message._id}>
         <Text.p mt={4} mb={1}>
-          {message.attrs.createdBy}
+          {Group.attrs.createdBy}
           {' '}
           says:
         </Text.p>
-        <Text.em>{message.attrs.creditorName}</Text.em>
-        <Text.em>{message.attrs.content}</Text.em>
+        <Text.em>{Group.attrs.AgentName}</Text.em>
+        <Text.em>{Group.attrs.content}</Text.em>
       </div>
     ));
   }
@@ -100,20 +100,20 @@ export default class inviteBranch extends React.Component {
       <Flex>
         <Box width={[1, 1 / 2]} mx="auto" textAlign="center">
           <Text.p textAlign="center">
-            Create a post:
+            Create New Agent
           </Text.p>
 
           <Input
             mt={3}
             width={1}
-            placeholder="Name"
-            value={this.state.name}
-            onChange={evt => this.setState({ name: evt.target.value })}
+            placeholder="Type Agent ID"
+            value={this.state._id}
+            onChange={evt => this.setState({ _id: evt.target.value })}
           />
           <Input
             mt={3}
             width={1}
-            placeholder="What do you have to say?"
+            placeholder="Your Welcome Message To Agent"
             value={this.state.newMessage}
             onChange={evt => this.setState({ newMessage: evt.target.value })}
           />
