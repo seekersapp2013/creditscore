@@ -27,19 +27,18 @@ class Home extends React.Component {
   }
 
   static async getInitialProps() {
-    
+    console.log("fetch messages")
     const messages = await Message.fetchList({
       sort: '-createdAt',
       limit: 10,
     }, { decrypt: false });
+    console.log(messages);
     return {
       messages,
     };
-    
-const person = await Person.findById('404eab3a-6ddc-4ba6-afe8-1c3fff464d44');   
   }
 
-  
+
 
   async componentDidMount() {
     const { userSession } = getConfig();
