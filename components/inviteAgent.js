@@ -2,6 +2,7 @@ import React from 'react';
 import { Flex, Box, Button } from 'rebass';
 import PropTypes from 'prop-types';
 import { User } from 'radiks';
+import { GroupInvitation } from 'radiks';
 
 import Text from '../styled/typography';
 import Input from '../styled/input';
@@ -10,7 +11,7 @@ import Person from '../models/Person';
 
 
 
-export default class Feed extends React.Component {
+export default class inviteAgent extends React.Component {
   static propTypes = {
     messages: PropTypes.array,
   }
@@ -48,6 +49,9 @@ export default class Feed extends React.Component {
     this.setState({ messages });
   }
 
+  //Agent Accepts Verification Here
+  const invitation = await GroupInvitation.findById(myInvitationID);
+  await invitation.activate();//
 
   newMessageListener(message) {
     const { messages } = this.state;
@@ -82,14 +86,8 @@ export default class Feed extends React.Component {
   messages() {
     return this.state.messages.map(message => (
       <div key={message._id}>
-        <Text.p mt={4} mb={1}>
-          {message.attrs.createdBy}
-          {' '}
-          says:
-        </Text.p>
-        <Text.em>{message.attrs.creditorName}</Text.em>
-        <Text.em>{message.attrs.content}</Text.em>
-      </div>
+        
+          </div>
     ));
   }
 
@@ -98,7 +96,7 @@ export default class Feed extends React.Component {
       <Flex>
         <Box width={[1, 1 / 2]} mx="auto" textAlign="center">
           <Text.p textAlign="center">
-            Create a post:
+            Agent
           </Text.p>
 
           <Input

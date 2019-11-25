@@ -7,10 +7,10 @@ import Text from '../styled/typography';
 import Input from '../styled/input';
 import Message from '../models/Message';
 import Person from '../models/Person';
+import { UserGroup } from 'radiks';
 
 
-
-export default class Feed extends React.Component {
+export default class inviteBranch extends React.Component {
   static propTypes = {
     messages: PropTypes.array,
   }
@@ -48,6 +48,17 @@ export default class Feed extends React.Component {
     this.setState({ messages });
   }
 
+  const group = new UserGroup({ name: 'Branch 1' });
+  await group.create();
+
+  //Branch Invites ID. 
+  const group = await UserGroup.findById(myGroupId);
+    const usernameToInvite = 'babalola.id';
+    const invitation = await group.makeGroupMembership(usernameToInvite);
+        console.log(invitation._id); // the ID used to later activate an invitation
+    
+    //List all Agents
+    const groups = await UserGroup.myGroups();
 
   newMessageListener(message) {
     const { messages } = this.state;
@@ -56,15 +67,6 @@ export default class Feed extends React.Component {
       this.setState({ messages });
     }
   }
-
-  newPersonListener(person) {
-    const { persons } = this.state;
-    if (!this.state.createdPersonIDs[person._id]) {
-      persons.unshift(person);
-      this.setState({ persons });
-    }
-  }
-
   async submit() {
     const { newMessage, name } = this.state;
     const message = new Message({

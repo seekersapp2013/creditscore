@@ -10,7 +10,7 @@ import Person from '../models/Person';
 
 
 
-export default class Feed extends React.Component {
+export default class inviteMFB extends React.Component {
   static propTypes = {
     messages: PropTypes.array,
   }
