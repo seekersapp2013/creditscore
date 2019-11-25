@@ -15,26 +15,18 @@ import Feed from '../components/feed';
 
 class Home extends React.Component {
   static propTypes = {
-    messages: PropTypes.array,
   }
 
   static defaultProps = {
-    messages: [],
   }
 
   state = {
     currentUser: null,
+    messages: [],
   }
 
   static async getInitialProps() {
-    console.log("fetch messages")
-    const messages = await Message.fetchList({
-      sort: '-createdAt',
-      limit: 10,
-    }, { decrypt: false });
-    console.log(messages);
     return {
-      messages,
     };
   }
 
@@ -45,6 +37,13 @@ class Home extends React.Component {
     if (userSession.isUserSignedIn()) {
       const currentUser = userSession.loadUserData();
       this.setState({ currentUser });
+
+      const messages = await Message.fetchList({
+        sort: '-createdAt',
+        limit: 10,
+      }, { decrypt: true });
+      console.log({messages})
+      this.setState({messages})
     } else if (userSession.isSignInPending()) {
       const currentUser = await userSession.handlePendingSignIn();
       await User.createWithCurrentUser();
@@ -66,7 +65,8 @@ class Home extends React.Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, messages } = this.state;
+    console.log({messages})
     return (
       <>
         <Flex>
@@ -80,7 +80,7 @@ class Home extends React.Component {
                   {'. '}
                   <a href="javascript:void(0)" onClick={this.logout}>Log Out</a>
                 </Text.small>
-                <Feed messages={this.props.messages} />
+                <Feed messages={messages} />
               </>
             ) : (
               <>
