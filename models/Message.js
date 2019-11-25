@@ -4,12 +4,8 @@ export default class Message extends Model {
     static className = 'Message';
 
     static schema = {
-      name: {type: String,
-        decrypted: true,
-      },
-      content: {type: String,
-        decrypted: true,
-      },
+      creditorName: String,
+      content: String,
       age: Number,
       phone: Number,
       address: String,
