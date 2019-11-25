@@ -19,6 +19,7 @@ export default class Feed extends React.Component {
   }
 
   state = {
+    name: '',
     newMessage: '',
     createdMessageIDs: {},
     messages: [],
@@ -38,7 +39,7 @@ export default class Feed extends React.Component {
     Message.addStreamListener(this.newMessageListener.bind(this));
     Person.addStreamListener(this.newPersonListener.bind(this));
 
-  
+
   }
 
   newMessageListener(message) {
@@ -54,13 +55,14 @@ export default class Feed extends React.Component {
     if (!this.state.createdPersonIDs[person._id]) {
       persons.unshift(person);
       this.setState({ persons });
-    } 
+    }
   }
 
   async submit() {
-    const { newMessage } = this.state;
+    const { newMessage, name } = this.state;
     const message = new Message({
       content: newMessage,
+      name,
       createdBy: this.state.currentUser._id,
     });
     const { messages, createdMessageIDs } = this.state;
@@ -68,20 +70,6 @@ export default class Feed extends React.Component {
     createdMessageIDs[message._id] = true;
     this.setState({ messages, createdMessageIDs, newMessage: '' });
     await message.save();
-   
-    const { newPerson } = this.state;
-    const person = new Person({
-      name: name,
-      isHuman: false,
-      likesDogs: false, // just an example, I love dogs!
-      createdBy: this.state.currentUser._id,
-    });
-    await person.save();
-    const { persons } = this.state;
-    persons.unshift(Person);
-    this.setState({ persons, newPerson: '' });
-
- 
   }
 
   messages() {
@@ -92,6 +80,7 @@ export default class Feed extends React.Component {
           {' '}
           says:
         </Text.p>
+        <Text.em>{message.attrs.name}</Text.em>
         <Text.em>{message.attrs.content}</Text.em>
       </div>
     ));

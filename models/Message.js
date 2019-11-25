@@ -4,7 +4,12 @@ export default class Message extends Model {
     static className = 'Message';
 
     static schema = {
-      name: String,
+      name: {type: String,
+        decrypted: true,
+      },
+      content: {type: String,
+        decrypted: true,
+      },
       age: Number,
       phone: Number,
       address: String,
@@ -24,6 +29,6 @@ export default class Message extends Model {
         decrypted: false // all users will know if this record likes dogs!
       }
     }
-  
-  
+
+
 }
