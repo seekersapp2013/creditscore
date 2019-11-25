@@ -50,7 +50,6 @@ class Home extends React.Component {
       await User.createWithCurrentUser();
       this.setState({ currentUser });
     }
-    Home.getInitialProps();
   }
 
   login = () => {
