@@ -9,9 +9,10 @@ export default class Message extends Model {
       age: Number,
       phone: Number,
       address: String,
+      bName: String,
       bType: String,
       sales: Number,
-      KinName: String,
+      kinName: String,
       gurantor: String,
       gurantorAddress: String,
       gurantorBusiness: String,
@@ -19,7 +20,7 @@ export default class Message extends Model {
       loanAmount: Number,
       customerSignature: String,
       gurantorSignature: String,
-      debitHistory: Boolean,
+      debtHistory: Boolean,
       hasDebt: {
         type: Boolean,
         decrypted: false // all users will know if this record likes dogs!

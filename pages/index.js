@@ -71,7 +71,7 @@ class Home extends React.Component {
       <>
         <Flex>
           <Box width={[1, 3 / 4]} mx="auto">
-            <Text.h1 textAlign="center">Creddit Score</Text.h1>
+            <Text.h1 textAlign="center">Credit Sense</Text.h1>
             {currentUser ? (
               <>
                 <Text.small textAlign="center" display="block">Logged in as
