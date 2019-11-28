@@ -1,31 +1,10 @@
 import { Model } from 'radiks';
 
-export default class Message extends Model {
-    static className = 'Message';
+export default class Transaction extends Model {
+    static className = 'Transaction';
 
     static schema = {
-      creditorName: String,
-      content: String,
-      age: Number,
-      phone: Number,
-      address: String,
-      bName: String,
-      bType: String,
-      sales: Number,
-      kinName: String,
-      guarantor: String,
-      guarantorAddress: String,
-      guarantorBusiness: String,
-      guarantorPhone: Number,
       loanAmount: Number,
-      customerSignature: String,
-      guarantorSignature: String,
-      
-      debtHistory: Boolean,
-      hasDebt: {
-        type: Boolean,
-        decrypted: false // all users will know if this record likes dogs!
-      },
       meetingDay: String,
       mainSavings: Number,
       disbursementDate: String,
@@ -45,9 +24,6 @@ export default class Message extends Model {
       repayment: Number,//Repayment
       balance2: Number,//Repayment balance
       agentSignature: Number,// Agent signature
-
-
     }
-
 
 }
